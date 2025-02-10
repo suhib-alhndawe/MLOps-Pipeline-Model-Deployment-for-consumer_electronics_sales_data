@@ -5,12 +5,10 @@ import joblib
 import numpy as np
 import pandas as pd
 from mangum import Mangum
-# تحميل النموذج المدرب و LabelEncoders المحفوظة
 pipeline = joblib.load('purchase_intent_model.pkl')
 le_category = joblib.load('le_category.pkl')
 le_brand = joblib.load('le_brand.pkl')
 
-# إعداد FastAPI
 app = FastAPI()
 app.add_middleware(CORSMiddleware,
                    allow_origins=["*"],
