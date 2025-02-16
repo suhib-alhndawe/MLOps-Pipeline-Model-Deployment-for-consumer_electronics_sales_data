@@ -12,11 +12,14 @@ le_brand = joblib.load('le_brand.pkl')
 
 # إعداد FastAPI
 app = FastAPI()
-app.add_middleware(CORSMiddleware,
-                   allow_origins=["*"],
-                   allow_methods=["*"],
-                   allow_headers=["*"],
-                   )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/", response_class=HTMLResponse)
 def hi():
