@@ -3,6 +3,7 @@
 ## 📌 Project Overview
 
 This project aims to predict customer purchase intent based on consumer electronics sales data. It leverages machine learning pipelines for feature engineering, model training, and deployment. The model is deployed using **FastAPI** and **AWS Lambda**, enabling efficient inference.
+fot Testing :https://mlops-pipeline-model-deployment-for.onrender.com
 
 ## 🛠️ Technologies Used
 
