@@ -10,15 +10,14 @@ pipeline = joblib.load('purchase_intent_model.pkl')
 le_category = joblib.load('le_category.pkl')
 le_brand = joblib.load('le_brand.pkl')
 
-# إعداد FastAPI
-app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://mlops-pipeline-model-deployment-for.onrender.com"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -141,7 +140,7 @@ def hi():
                 event.preventDefault(); // منع إعادة تحميل الصفحة
                 const formData = new FormData(this);
                 const params = new URLSearchParams(formData).toString();
-                const apiUrl = `http://127.0.0.1:8000/PurchaseIntent?${params}`;
+                const apiUrl = `https://mlops-pipeline-model-deployment-for.onrender.com/PurchaseIntent?${params}`;
 
                 try {
                     const response = await fetch(apiUrl);
