@@ -9,6 +9,7 @@ import pandas as pd
 pipeline = joblib.load('purchase_intent_model.pkl')
 le_category = joblib.load('le_category.pkl')
 le_brand = joblib.load('le_brand.pkl')
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
