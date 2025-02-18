@@ -1,100 +1,65 @@
-# Purchase Intent Prediction
+# Purchase Intent Prediction Project with FastAPI & RandomForest 🚀
 
-## 📌 Project Overview
+## Project Description
+This project aims to build a web interface for predicting customers' purchase intent in an electronics store, using a machine learning model trained on sales data. The project uses FastAPI as the web framework and RandomForest as the classification algorithm.
 
-This project aims to predict customer purchase intent based on consumer electronics sales data. It leverages machine learning pipelines for feature engineering, model training, and deployment. The model is deployed using **FastAPI** and **AWS Lambda**, enabling efficient inference.
-fot Testing :https://mlops-pipeline-model-deployment-for.onrender.com
+[**Application Link**](https://mlops-pipeline-model-deployment-for.onrender.com) 🌐
 
-## 🛠️ Technologies Used
+## Project Components
+- **Python Libraries**: `pandas`, `numpy`, `sklearn`, `joblib`, `fastapi`, `starlette`
+- **Model Used**: RandomForestClassifier 🧠
+- **Services**: Deployed on Render 🌐
 
-- **Python** (pandas, numpy, scikit-learn)
-- **Machine Learning Pipeline** (Feature Engineering, Preprocessing, Model Training)
-- **FastAPI** (API Development)
-- **AWS Lambda** (Serverless Deployment)
-- **Joblib** (Model Serialization)
-- **MLOps** (Automated ML workflows)
+## Workflow Steps
 
-## 📂 Project Structure
+### 1. Data Reading and Cleaning 🧹
+- Importing data from a CSV file.
+- Encoding categorical variables using `LabelEncoder`.
+- Removing unnecessary columns.
 
-```
-MLOPS/
-├── dependencies/
-│   ├── aws_lambda_artifact.zip   # Deployment package for AWS Lambda
-│   ├── consumer_electronics_sales_data.csv  # Dataset
-├── fast.py                        # FastAPI application
-├── le_brand.pkl                   # LabelEncoder for ProductBrand
-├── le_category.pkl                 # LabelEncoder for ProductCategory
-├── pipeline.py                     # Model training pipeline
-├── purchase_intent_model.pkl       # Trained machine learning model
-├── requirements.txt                # Python dependencies
-```
+### 2. Feature Engineering 🔍
+- Adding a `PricePerUnit` feature by calculating price per unit.
+- Categorizing ages into age groups using `pd.cut`.
 
-## 🚀 How to Run Locally
+### 3. Data Splitting 📊
+- Splitting the data into training and testing sets (75/25 split).
 
-### 1️⃣ Setup Environment
+### 4. Model Building with Pipeline 🛠️
+- `MinMaxScaler` for data normalization.
+- `SelectKBest` to select the top 5 features.
+- `RandomForestClassifier` as the classification model.
 
-```sh
-pip install -r requirements.txt
-```
+### 5. Saving the Model and LabelEncoders 💾
+The model and the `LabelEncoders` are saved using the `joblib` library.
 
-### 2️⃣ Train the Model
+### 6. Frontend Development 🎨
+- Creating a web page using HTML, CSS, and JavaScript.
+- Collecting user inputs via a form and sending them to the API.
 
-```sh
-python pipeline.py
-```
+### 7. Running the Backend with FastAPI ⚙️
+- `/PurchaseIntent` endpoint for prediction.
+- Handling user inputs and converting them to model-compatible format.
 
-This script:
-- Reads the dataset
-- Cleans and preprocesses data
-- Builds an ML pipeline with feature selection
-- Trains a **RandomForestClassifier**
-- Saves the model and encoders
+## How to Use 📖
 
-### 3️⃣ Start FastAPI Server
-
-```sh
-uvicorn fast:app --reload
+1. Run the project locally:
+```bash
+uvicorn main:app --reload
 ```
 
-FastAPI will be running at: `http://127.0.0.1:8000`
-
-## 🔧 Deploy to AWS Lambda
-
-### 1️⃣ Package Dependencies
-
-```sh
-pip install -r requirements.txt -t package/
-cd package && zip -r ../aws_lambda_artifact.zip .
+### API Request Example ⚡
+```bash
+GET /PurchaseIntent?PrCa=Smart%20Watches&PrBr=Samsung&PrPr=980.39&CuAge=35&CuGe=1&PuFr=7&CuSa=2
 ```
 
-### 2️⃣ Add Model Files
-
-```sh
-zip -g aws_lambda_artifact.zip purchase_intent_model.pkl
-zip -g aws_lambda_artifact.zip le_category.pkl le_brand.pkl
-zip -g aws_lambda_artifact.zip fast.py
+### Expected Response ✅
+```json
+{"message": "Purchase"} or {"message": "No Purchase"}
 ```
 
-### 3️⃣ Upload to AWS Lambda
+## Notes 📝
+- Ensure the API is running before sending requests.
+- Make sure text values match the ones the model was trained on.
 
-- Navigate to AWS Lambda console
-- Create a new function (Python 3.x)
-- Upload `aws_lambda_artifact.zip`
-- Configure API Gateway for invocation
-
-## 📊 Model Performance
-
-The model achieved an accuracy of **XX%** on the test set.
-
-## 🤝 Contributing
-
-Feel free to fork this repo and submit a PR with improvements!
-
-## 📜 License
-
-MIT License
-
----
-
-🚀 **Developed by SUHIB ALFURJANI**
+**Developer**: Suhib Alfurjani 👨‍💻
 
